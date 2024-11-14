@@ -16,6 +16,7 @@ If you just want to use mobile (phone, iPad, etc.) to access the YACReaderLibrar
 -  Supports both copying files and creating symbolic links.
 -  Caches metadata to avoid unnecessary file operations (books will not be re-copied/re-linked)
 -  If book is removed from the Calibre Library, it will also be removed from the YACReaderLibrary
+-  Files ending with `.cbr`, `.cbz`, `.pdf`, `.zip` and the designated tag will be synced
 
 ## Installation
 
