@@ -8,6 +8,7 @@ from datetime import datetime
 import json
 import time
 import logging
+import shutil
 from typing import Dict, Set, Tuple
 
 class ComicSyncManager:
@@ -217,17 +218,24 @@ class ComicSyncManager:
             if os.path.exists(target_file):
                 os.remove(target_file)
             # Create a symbolic link from the source file to the target location
-            os.symlink(source_file, target_file)
-            logging.info(f"Symlink created: {os.path.basename(target_file)} -> {source_file}")
+            if LIBRARY_METHOD == 'link':
+                os.symlink(source_file, target_file)
+                logging.info(f"Symlink created: {os.path.basename(target_file)} -> {source_file}")
+            elif LIBRARY_METHOD == 'copy':
+                shutil.copy(source_file, target_file)  # This copies the file
+                logging.info(f"File copied: {os.path.basename(target_file)} -> {source_file}")
+            else:
+                logging.error("Invalid LIBRARY_METHOD. Use 'link' or 'copy'.")
         except Exception as e:
             logging.error(f"Error creating symlink for {os.path.basename(source_file)}: {str(e)}")
 
 
 if __name__ == "__main__":
     # Configuration
-    CALIBRE_LIBRARY = r"put/directory/here/calibre_library" # Input Calibre library path here
-    OUTPUT_DIRECTORY = r"put/directory/here/comic_library" # Input YACReaderLibrary path here
+    CALIBRE_LIBRARY = "path/to/calibre/library" # Input Calibre library path here
+    OUTPUT_DIRECTORY = "path/to/yac/library" # Input YACReaderLibrary path here
     TAGS = ["Comics & Graphic Novels"]  # Add your tags here
+    LIBRARY_METHOD = 'copy' # set to 'copy' or 'link'
     
     # Create and run the sync manager
     sync_manager = ComicSyncManager(
