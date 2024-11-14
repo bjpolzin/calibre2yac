@@ -2,7 +2,7 @@
 Transfer comics in Calibre Library to series-separated YACReaderLibrary format
 
 ## Summary
-I created this repository as I prefer managing both my books and comics in one place using [Calibre](https://calibre-ebook.com/), but don't like using it to read. For comic reading across my tablets and for reading on a computer, I love using [YACReader](https://yacreader.com/). In order to get the best of both worlds I created this script.
+I created this repository as I prefer managing both my books and comics in one place using [Calibre](https://calibre-ebook.com/), but don't like using it to read anything and don't like the author-oriented directory structure. For comic reading across my tablets and for reading on a computer, I love using [YACReader](https://yacreader.com/). In order to get the best of both worlds I created this script.
 
 This queries the Calibre database with `sqlite3` to pull all files with a certain tag (I use 'Comics & Graphic Novels') and output them in a target directory that is separated by series instead of by author. I then have this script to run automatically every day to sync any books that go in/get removed from Calibre.
 
